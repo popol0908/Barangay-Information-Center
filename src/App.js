@@ -1,0 +1,279 @@
+import React, { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import { ToastProvider } from './contexts/ToastContext';
+import { LoadingProvider, useLoading } from './contexts/LoadingContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Loading from './components/Loading';
+import ChatAssistant from './components/ChatAssistant';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
+import Announcements from './pages/Announcements';
+import EmergencyAlerts from './pages/EmergencyAlerts';
+import Officials from './pages/Officials';
+import PendingVerification from './pages/PendingVerification';
+import VerificationDeclined from './pages/VerificationDeclined';
+import Profile from './pages/Profile';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import ManageAnnouncements from './pages/admin/ManageAnnouncements';
+import ManageEmergencyAlerts from './pages/admin/ManageEmergencyAlerts';
+import ManageOfficials from './pages/admin/ManageOfficials';
+import ResidentVerification from './pages/admin/ResidentVerification';
+import ManageAdminAccounts from './pages/admin/ManageAdminAccounts';
+import Feedback from './pages/Feedback';
+import ManageFeedback from './pages/admin/ManageFeedback';
+import Vote from './pages/Vote';
+import ManageVoting from './pages/admin/ManageVoting';
+import './App.css';
+import './styles/common.css';
+
+function AppContent() {
+  const location = useLocation();
+  const { isLoading, startLoading, stopLoading } = useLoading();
+  const prevLocationRef = useRef(location.pathname);
+  const loadingTimeoutRef = useRef(null);
+
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+  const isAdminPage = location.pathname.startsWith('/admin');
+
+  // Detect route changes and show loading
+  useEffect(() => {
+    // Skip loading for initial load or if navigating to/from auth pages
+    if (prevLocationRef.current === location.pathname) {
+      return;
+    }
+
+    // Don't show loading for auth page transitions
+    const isAuthTransition = 
+      location.pathname === '/login' || 
+      location.pathname === '/signup' ||
+      prevLocationRef.current === '/login' ||
+      prevLocationRef.current === '/signup';
+
+    if (!isAuthTransition) {
+      startLoading('Loading page...');
+      
+      // Clear any existing timeout
+      if (loadingTimeoutRef.current) {
+        clearTimeout(loadingTimeoutRef.current);
+      }
+
+      // Auto-stop loading after a maximum time (safety net)
+      loadingTimeoutRef.current = setTimeout(() => {
+        stopLoading();
+      }, 5000);
+
+      // Stop loading when route change is complete
+      // Use a delay to allow page components to mount and start their own loading states
+      const timer = setTimeout(() => {
+        stopLoading();
+        if (loadingTimeoutRef.current) {
+          clearTimeout(loadingTimeoutRef.current);
+        }
+      }, 500);
+
+      prevLocationRef.current = location.pathname;
+
+      return () => {
+        clearTimeout(timer);
+        if (loadingTimeoutRef.current) {
+          clearTimeout(loadingTimeoutRef.current);
+        }
+      };
+    } else {
+      prevLocationRef.current = location.pathname;
+    }
+  }, [location.pathname, startLoading, stopLoading]);
+
+  // Manage body scroll lock when loading
+  useEffect(() => {
+    if (isLoading) {
+      document.body.classList.add('loading-active');
+    } else {
+      document.body.classList.remove('loading-active');
+    }
+    return () => {
+      document.body.classList.remove('loading-active');
+    };
+  }, [isLoading]);
+
+  return (
+    <>
+      {isLoading && <Loading message="Loading page..." />}
+      <div className="App">
+        {!isAuthPage && !isAdminPage && <Navbar />}
+        <main className="main-content">
+        <Routes>
+            {}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute requireVerified>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/announcements"
+              element={
+                <ProtectedRoute>
+                  <Announcements />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/emergency-alerts"
+              element={
+                <ProtectedRoute requireVerified>
+                  <EmergencyAlerts />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/officials"
+              element={
+                <ProtectedRoute>
+                  <Officials />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/verification/pending"
+              element={
+                <ProtectedRoute>
+                  <PendingVerification />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/verification/declined"
+              element={
+                <ProtectedRoute>
+                  <VerificationDeclined />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/feedback"
+              element={
+                <ProtectedRoute requireVerified>
+                  <Feedback />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/vote"
+              element={
+                <ProtectedRoute requireVerified>
+                  <Vote />
+                </ProtectedRoute>
+              }
+            />
+            
+            {}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route
+              path="/admin/dashboard"
+              element={
+                <AdminProtectedRoute>
+                  <AdminDashboard />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/announcements"
+              element={
+                <AdminProtectedRoute>
+                  <ManageAnnouncements />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/emergency-alerts"
+              element={
+                <AdminProtectedRoute>
+                  <ManageEmergencyAlerts />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/officials"
+              element={
+                <AdminProtectedRoute>
+                  <ManageOfficials />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/residents"
+              element={
+                <AdminProtectedRoute>
+                  <ResidentVerification />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/accounts"
+              element={
+                <AdminProtectedRoute>
+                  <ManageAdminAccounts />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/feedback"
+              element={
+                <AdminProtectedRoute>
+                  <ManageFeedback />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/voting"
+              element={
+                <AdminProtectedRoute>
+                  <ManageVoting />
+                </AdminProtectedRoute>
+              }
+            />
+            
+            <Route path="/" element={<Login />} />
+          </Routes>
+          </main>
+          {!isAuthPage && !isAdminPage && <Footer />}
+        </div>
+        <ChatAssistant />
+      </>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <ToastProvider>
+        <LoadingProvider>
+          <Router>
+            <AppContent />
+          </Router>
+        </LoadingProvider>
+      </ToastProvider>
+    </AuthProvider>
+  );
+}
+
+export default App;

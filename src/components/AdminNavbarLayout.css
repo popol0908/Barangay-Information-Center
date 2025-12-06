@@ -1,0 +1,156 @@
+.admin-navbar {
+  /* Sidebar container: fixed on the left, full height */
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  z-index: 1000;
+  width: 240px !important;
+}
+
+.admin-navbar-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  height: 100% !important;
+  padding: 1.5rem 1.25rem;
+}
+
+/* Ensure brand stays on the left and does not shrink */
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Mobile menu toggle (hamburger) */
+.admin-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.admin-menu-toggle .menu-line {
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: #333;
+  margin: 3px 0;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.admin-menu-toggle.open .menu-line:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.admin-menu-toggle.open .menu-line:nth-child(2) {
+  opacity: 0;
+}
+
+.admin-menu-toggle.open .menu-line:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* Base nav links layout */
+.admin-nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.admin-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+
+/* Active link indicator refinement (uses existing palette) */
+.admin-nav-link.active {
+  position: relative;
+}
+
+.admin-nav-link.active::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12px;
+  bottom: 6px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Make logout button sit at the bottom of the sidebar */
+.admin-logout-btn {
+  margin-top: auto;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Shift all admin page content to the right of the sidebar */
+.admin-dashboard {
+  padding-left: 240px !important;
+}
+
+/* Responsive behavior: collapse links for smaller screens */
+@media (max-width: 992px) {
+  .admin-navbar {
+    width: 220px !important;
+  }
+
+  .admin-navbar-container {
+    padding-inline: 1rem;
+    gap: 1rem;
+  }
+
+  .admin-nav-links {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: max-height 0.25s ease, opacity 0.2s ease;
+  }
+
+  .admin-nav-links.open {
+    max-height: 320px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .admin-menu-toggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-navbar {
+    width: 200px !important;
+  }
+
+  .nav-label {
+    font-size: 0.9rem;
+  }
+}
+
+/* Accessibility: focus rings on keyboard navigation */
+.admin-nav-link:focus-visible,
+.admin-menu-toggle:focus-visible,
+.admin-logout-btn:focus-visible {
+  outline: 2px solid rgba(0, 82, 204, 0.8);
+  outline-offset: 2px;
+}
