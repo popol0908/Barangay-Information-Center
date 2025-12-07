@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Loading from './components/Loading';
 import ChatAssistant from './components/ChatAssistant';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Landing from './pages/Landing';
@@ -41,6 +42,7 @@ function AppContent() {
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
   const isAdminPage = location.pathname.startsWith('/admin');
+  const isLandingPage = location.pathname === '/';
 
   // Detect route changes and show loading
   useEffect(() => {
@@ -107,7 +109,7 @@ function AppContent() {
     <>
       {isLoading && <Loading message="Loading page..." />}
       <div className="App">
-        {!isAuthPage && !isAdminPage && <Navbar />}
+        {!isAuthPage && !isAdminPage && !isLandingPage && <Navbar />}
         <main className="main-content">
         <Routes>
             {}
@@ -256,9 +258,10 @@ function AppContent() {
             <Route path="/" element={<Landing />} />
           </Routes>
           </main>
-          {!isAuthPage && !isAdminPage && <Footer />}
+          {!isAuthPage && !isAdminPage && !isLandingPage && <Footer />}
         </div>
         <ChatAssistant />
+        <SpeedInsights />
       </>
   );
 }
