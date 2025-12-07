@@ -1,0 +1,957 @@
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(180deg, #f0f4f8 0%, #ffffff 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #0077B6 0%, #005a8f 50%, #004d7a 100%);
+  color: #fff;
+  padding: 5rem 1.5rem 6rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  margin: 2rem 1rem 0;
+  box-shadow: 0 20px 60px rgba(0, 119, 182, 0.2), 0 8px 24px rgba(0, 119, 182, 0.15);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, -30px) scale(1.1);
+  }
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  text-align: center;
+  margin-bottom: 6rem;
+  padding-top: 1.5rem;
+  position: relative;
+}
+
+.hero-content::before {
+  content: '';
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  border-radius: 2px;
+}
+
+.hero-title {
+  font-size: 3.75rem;
+  font-weight: 700;
+  margin: 0 0 1.75rem;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: inline-block;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Fallback for browsers that don't support background-clip: text */
+@supports not (-webkit-background-clip: text) {
+  .hero-title {
+    -webkit-text-fill-color: #ffffff;
+    background: none;
+    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3), 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.hero-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  border-radius: 2px;
+}
+
+.hero-subtitle {
+  font-size: 1.4rem;
+  margin: 0 auto;
+  opacity: 0.95;
+  font-weight: 400;
+  line-height: 1.75;
+  max-width: 720px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  position: relative;
+  padding: 0 1.5rem;
+  letter-spacing: 0.01em;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Access Points */
+.access-points {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.access-card {
+  background: #ffffff !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  text-decoration: none;
+  color: #1f2937 !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  min-height: 320px;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.access-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, transparent);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+/* Resident Portal - White Background with Green Accents */
+.resident-card {
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+.resident-card::after {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.resident-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.03) 0%, rgba(5, 150, 105, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.resident-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15), 0 8px 16px rgba(16, 185, 129, 0.1), 0 0 0 1px rgba(16, 185, 129, 0.1);
+}
+
+.resident-card:hover::before {
+  opacity: 1;
+}
+
+.resident-card:hover::after {
+  height: 5px;
+}
+
+.resident-card .access-title {
+  color: #1f2937 !important;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.resident-card .access-description {
+  color: #6b7280 !important;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.resident-card .access-icon {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.15) 100%);
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.resident-card:hover .access-icon {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.2) 100%);
+  border-color: rgba(16, 185, 129, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.2);
+}
+
+.resident-card .access-icon svg {
+  stroke: #10b981 !important;
+  color: #10b981 !important;
+}
+
+.resident-card .access-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25), 0 2px 4px rgba(16, 185, 129, 0.15);
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+}
+
+.resident-card .access-button span {
+  color: #ffffff !important;
+}
+
+.resident-card .access-button svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.resident-card:hover .access-button {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35), 0 3px 8px rgba(16, 185, 129, 0.2);
+  transform: translateX(4px) translateY(-2px);
+}
+
+/* Admin Portal - White Background with Purple Accents */
+.admin-card {
+  border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+.admin-card::after {
+  background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+}
+
+.admin-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.03) 0%, rgba(124, 58, 237, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.admin-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15), 0 8px 16px rgba(139, 92, 246, 0.1), 0 0 0 1px rgba(139, 92, 246, 0.1);
+}
+
+.admin-card:hover::before {
+  opacity: 1;
+}
+
+.admin-card:hover::after {
+  height: 5px;
+}
+
+.admin-card .access-title {
+  color: #1f2937 !important;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.admin-card .access-description {
+  color: #6b7280 !important;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.admin-card .access-icon {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.15) 100%);
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
+}
+
+.admin-card:hover .access-icon {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(124, 58, 237, 0.2) 100%);
+  border-color: rgba(139, 92, 246, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.2);
+}
+
+.admin-card .access-icon svg {
+  stroke: #8b5cf6 !important;
+  color: #8b5cf6 !important;
+}
+
+.admin-card .access-button {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  border: none;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25), 0 2px 4px rgba(139, 92, 246, 0.15);
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+}
+
+.admin-card .access-button span {
+  color: #ffffff !important;
+}
+
+.admin-card .access-button svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.admin-card:hover .access-button {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35), 0 3px 8px rgba(139, 92, 246, 0.2);
+  transform: translateX(4px) translateY(-2px);
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .access-card {
+    background: #ffffff !important;
+  }
+  .resident-card {
+    background: #ffffff !important;
+  }
+  .admin-card {
+    background: #ffffff !important;
+  }
+}
+
+.access-icon {
+  width: 72px;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.access-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: #ffffff !important;
+  fill: none;
+  color: #ffffff !important;
+  stroke-width: 2.5;
+}
+
+.access-button svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+  stroke: #ffffff !important;
+  fill: none;
+  color: #ffffff !important;
+}
+
+.access-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  position: relative;
+  z-index: 2;
+  color: #1f2937;
+  letter-spacing: -0.01em;
+}
+
+.access-description {
+  font-size: 1rem;
+  margin: 0 0 2rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  color: #6b7280;
+}
+
+.access-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 2;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+
+.access-button span {
+  position: relative;
+  z-index: 1;
+}
+
+.access-button svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  stroke-width: 2.5;
+}
+
+.access-card:hover .access-button svg {
+  transform: translateX(4px);
+}
+
+/* Main Content */
+.landing-main {
+  max-width: 1200px;
+  margin: -2rem auto 3rem;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Features Section */
+.features-section {
+  background: #fff;
+  padding: 3rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  grid-column: 1 / -1;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  color: #1f2937;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.feature-card {
+  background: #f8fafc;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00AEEF, #0077B6);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  border-color: #0077B6;
+  box-shadow: 0 12px 24px rgba(0, 119, 182, 0.15);
+  background: #fff;
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #00AEEF 0%, #0077B6 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 16px rgba(0, 119, 182, 0.2);
+}
+
+.feature-icon-wrapper svg {
+  width: 32px;
+  height: 32px;
+  stroke: #fff;
+  fill: none;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: #1f2937;
+}
+
+.feature-description {
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.about-landing {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-landing h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.about-landing > p {
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.highlight {
+  background: #f8fafc;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+}
+
+.highlight:hover {
+  background: #f0f4f8;
+  border-color: #0077B6;
+}
+
+.highlight-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.highlight-content {
+  flex: 1;
+}
+
+.highlight-content strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.highlight-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .landing-main {
+    grid-template-columns: 1fr;
+    margin-top: -1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .features-section {
+    padding: 2.5rem 2rem;
+  }
+
+  .access-points {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 600px;
+  }
+
+  .access-card {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 1.25rem 5rem;
+    margin: 1.5rem 0.75rem 0;
+    border-radius: 20px;
+  }
+
+  .hero-content {
+    margin-bottom: 5rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title::after {
+    width: 100px;
+    height: 3px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .hero::after {
+    width: 400px;
+    height: 400px;
+  }
+
+  .access-points {
+    gap: 1.75rem;
+    padding: 0 0.5rem;
+  }
+
+  .access-card {
+    padding: 2.5rem 2rem;
+    min-height: 280px;
+  }
+
+  .access-title {
+    font-size: 1.4rem;
+  }
+
+  .access-description {
+    font-size: 0.95rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .access-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.75rem;
+  }
+
+  .access-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .access-button {
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+  }
+
+  .features-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  .about-landing {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 1rem 4rem;
+    margin: 1rem 0.5rem 0;
+    border-radius: 16px;
+  }
+
+  .hero-content {
+    margin-bottom: 4rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-title::after {
+    width: 80px;
+    height: 3px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    padding: 0 0.5rem;
+  }
+
+  .hero::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .access-points {
+    gap: 1.5rem;
+    padding: 0;
+  }
+
+  .access-card {
+    padding: 2rem 1.5rem;
+    min-height: 260px;
+    border-radius: 16px;
+  }
+
+  .access-title {
+    font-size: 1.3rem;
+  }
+
+  .access-description {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .access-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1.5rem;
+  }
+
+  .access-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .access-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 1rem 4rem;
+    margin: 1rem 0.5rem 0;
+    border-radius: 16px;
+  }
+
+  .hero-content {
+    margin-bottom: 4rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-title::after {
+    width: 80px;
+    height: 3px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    padding: 0 0.5rem;
+  }
+
+  .hero::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .access-points {
+    gap: 1.5rem;
+    padding: 0;
+  }
+
+  .access-card {
+    padding: 2rem 1.5rem;
+    min-height: 260px;
+    border-radius: 16px;
+  }
+
+  .access-title {
+    font-size: 1.3rem;
+  }
+
+  .access-description {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .access-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1.5rem;
+  }
+
+  .access-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .access-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  .access-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .feature-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .feature-icon-wrapper {
+    width: 56px;
+    height: 56px;
+  }
+
+  .feature-icon-wrapper svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .feature-title {
+    font-size: 1.1rem;
+  }
+
+  .feature-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .access-card,
+  .access-icon,
+  .access-button,
+  .access-button svg,
+  .announcement-item,
+  .highlight,
+  .view-all {
+    transition: none;
+  }
+
+  .access-card:hover {
+    transform: none;
+  }
+
+  .access-card:hover .access-button {
+    transform: none;
+  }
+}
