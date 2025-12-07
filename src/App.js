@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { AuthProvider } from './contexts/AuthContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { LoadingProvider, useLoading } from './contexts/LoadingContext';
@@ -41,7 +42,6 @@ function AppContent() {
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
   const isAdminPage = location.pathname.startsWith('/admin');
-  const isLandingPage = location.pathname === '/';
 
   // Detect route changes and show loading
   useEffect(() => {
@@ -108,7 +108,7 @@ function AppContent() {
     <>
       {isLoading && <Loading message="Loading page..." />}
       <div className="App">
-        {!isAuthPage && !isAdminPage && !isLandingPage && <Navbar />}
+        {!isAuthPage && !isAdminPage && <Navbar />}
         <main className="main-content">
         <Routes>
             {}
@@ -257,9 +257,10 @@ function AppContent() {
             <Route path="/" element={<Landing />} />
           </Routes>
           </main>
-          {!isAuthPage && !isAdminPage && !isLandingPage && <Footer />}
+          {!isAuthPage && !isAdminPage && <Footer />}
         </div>
         <ChatAssistant />
+        <SpeedInsights />
       </>
   );
 }
