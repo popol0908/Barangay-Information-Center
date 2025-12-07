@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import { AuthProvider } from './contexts/AuthContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { LoadingProvider, useLoading } from './contexts/LoadingContext';
@@ -260,7 +259,6 @@ function AppContent() {
           {!isAuthPage && !isAdminPage && <Footer />}
         </div>
         <ChatAssistant />
-        <SpeedInsights />
       </>
   );
 }
