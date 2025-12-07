@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { LoadingProvider, useLoading } from './contexts/LoadingContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -37,12 +37,17 @@ import './styles/common.css';
 function AppContent() {
   const location = useLocation();
   const { isLoading, startLoading, stopLoading } = useLoading();
+  const { currentUser } = useAuth();
   const prevLocationRef = useRef(location.pathname);
   const loadingTimeoutRef = useRef(null);
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
   const isAdminPage = location.pathname.startsWith('/admin');
   const isLandingPage = location.pathname === '/';
+  const isAdminLoginPage = location.pathname === '/admin/login';
+  
+  // Only show ChatAssistant when user is authenticated and not on public pages
+  const shouldShowChatAssistant = currentUser && !isLandingPage && !isAuthPage && !isAdminLoginPage;
 
   // Detect route changes and show loading
   useEffect(() => {
@@ -260,7 +265,7 @@ function AppContent() {
           </main>
           {!isAuthPage && !isAdminPage && !isLandingPage && <Footer />}
         </div>
-        <ChatAssistant />
+        {shouldShowChatAssistant && <ChatAssistant />}
         <SpeedInsights />
       </>
   );
