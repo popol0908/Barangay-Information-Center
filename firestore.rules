@@ -121,6 +121,25 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     
+    // Events collection
+    match /events/{eventId} {
+      // Everyone can read events
+      allow read: if isAuthenticated();
+      // Only admins can create, update, or delete
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // Event Registrations collection
+    match /eventRegistrations/{registrationId} {
+      // Users can read all registrations (needed for registration counts and checking if user registered)
+      allow read: if isAuthenticated();
+      // Users can create their own registrations
+      allow create: if isAuthenticated() && 
+                      request.resource.data.userId == request.auth.uid;
+      // Only admins can update or delete registrations
+      allow update, delete: if isAdmin();
+    }
+    
     // Default: deny all other access
     match /{document=**} {
       allow read, write: if false;

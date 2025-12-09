@@ -31,6 +31,8 @@ import Feedback from './pages/Feedback';
 import ManageFeedback from './pages/admin/ManageFeedback';
 import Vote from './pages/Vote';
 import ManageVoting from './pages/admin/ManageVoting';
+import Events from './pages/Events';
+import ManageEvents from './pages/admin/ManageEvents';
 import './App.css';
 import './styles/common.css';
 
@@ -192,6 +194,14 @@ function AppContent() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/events"
+              element={
+                <ProtectedRoute requireVerified>
+                  <Events />
+                </ProtectedRoute>
+              }
+            />
             
             {}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -256,6 +266,14 @@ function AppContent() {
               element={
                 <AdminProtectedRoute>
                   <ManageVoting />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/events"
+              element={
+                <AdminProtectedRoute>
+                  <ManageEvents />
                 </AdminProtectedRoute>
               }
             />

@@ -12,16 +12,54 @@ const AdminNavbar = () => {
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  const [openDropdown, setOpenDropdown] = useState(null);
+
   const navItems = [
     { path: '/admin/dashboard', label: 'Dashboard', icon: '📊' },
-    { path: '/admin/announcements', label: 'Announcements', icon: '📢' },
-    { path: '/admin/emergency-alerts', label: 'Emergency Alerts', icon: '🚨' },
-    { path: '/admin/officials', label: 'Officials', icon: '👥' },
-    { path: '/admin/residents', label: 'Resident Verification', icon: '✅' },
-    { path: '/admin/voting', label: 'Voting & Surveys', icon: '🗳️' },
+    {
+      label: 'Communication',
+      icon: '📣',
+      isDropdown: true,
+      items: [
+        { path: '/admin/announcements', label: 'Announcements', icon: '📢' },
+        { path: '/admin/emergency-alerts', label: 'Emergency Alerts', icon: '🚨' },
+      ]
+    },
+    {
+      label: 'Community',
+      icon: '👥',
+      isDropdown: true,
+      items: [
+        { path: '/admin/officials', label: 'Officials', icon: '👔' },
+        { path: '/admin/residents', label: 'Resident Verification', icon: '✅' },
+      ]
+    },
+    {
+      label: 'Engagement',
+      icon: '🗳️',
+      isDropdown: true,
+      items: [
+        { path: '/admin/voting', label: 'Voting & Surveys', icon: '🗳️' },
+        { path: '/admin/events', label: 'Events & Programs', icon: '📅' },
+      ]
+    },
     { path: '/admin/feedback', label: 'Review Feedback', icon: '💬' },
-    { path: '/admin/accounts', label: 'Admin Accounts', icon: '👤' },
+    { path: '/admin/accounts', label: 'Admin Accounts', icon: '⚙️' },
   ];
+
+  const toggleDropdown = (label) => {
+    setOpenDropdown(openDropdown === label ? null : label);
+  };
+
+  const isItemActive = (item) => {
+    if (item.path) {
+      return location.pathname === item.path;
+    }
+    if (item.isDropdown) {
+      return item.items.some(subItem => location.pathname === subItem.path);
+    }
+    return false;
+  };
 
   const handleLogout = async () => {
     try {
@@ -101,16 +139,52 @@ const AdminNavbar = () => {
           {/* Navigation Items */}
           <nav className="sidebar-nav">
             {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={(e) => handleNavClick(e, item.path)}
-                className={`sidebar-nav-item ${location.pathname === item.path ? 'active' : ''}`}
-                title={!isSidebarOpen ? item.label : ''}
-              >
-                <span className="nav-icon">{item.icon}</span>
-                {isSidebarOpen && <span className="nav-label">{item.label}</span>}
-              </Link>
+              <div key={item.label} className="nav-item-container">
+                {item.isDropdown ? (
+                  <>
+                    <button
+                      onClick={() => toggleDropdown(item.label)}
+                      className={`sidebar-nav-item dropdown-toggle ${isItemActive(item) ? 'active' : ''}`}
+                      title={!isSidebarOpen ? item.label : ''}
+                    >
+                      <span className="nav-icon">{item.icon}</span>
+                      {isSidebarOpen && (
+                        <>
+                          <span className="nav-label">{item.label}</span>
+                          <span className={`dropdown-chevron ${openDropdown === item.label ? 'open' : ''}`}>
+                            ▼
+                          </span>
+                        </>
+                      )}
+                    </button>
+                    {isSidebarOpen && openDropdown === item.label && (
+                      <div className="dropdown-menu">
+                        {item.items.map((subItem) => (
+                          <Link
+                            key={subItem.path}
+                            to={subItem.path}
+                            onClick={(e) => handleNavClick(e, subItem.path)}
+                            className={`dropdown-item ${location.pathname === subItem.path ? 'active' : ''}`}
+                          >
+                            <span className="nav-icon">{subItem.icon}</span>
+                            <span className="nav-label">{subItem.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    to={item.path}
+                    onClick={(e) => handleNavClick(e, item.path)}
+                    className={`sidebar-nav-item ${location.pathname === item.path ? 'active' : ''}`}
+                    title={!isSidebarOpen ? item.label : ''}
+                  >
+                    <span className="nav-icon">{item.icon}</span>
+                    {isSidebarOpen && <span className="nav-label">{item.label}</span>}
+                  </Link>
+                )}
+              </div>
             ))}
           </nav>
 

@@ -9,15 +9,45 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const navItems = [
     { path: '/dashboard', label: 'Home', icon: '🏠' },
-    { path: '/announcements', label: 'Announcements', icon: '📢' },
-    { path: '/officials', label: 'Officials', icon: '👥' },
-    { path: '/emergency-alerts', label: 'Emergency Alerts', icon: '🚨' },
-    { path: '/vote', label: 'Vote & Surveys', icon: '🗳️' },
-    { path: '/feedback', label: 'Feedback & Concerns', icon: '💬' },
+    {
+      label: 'Updates',
+      icon: '📣',
+      isDropdown: true,
+      items: [
+        { path: '/announcements', label: 'Announcements', icon: '📢' },
+        { path: '/emergency-alerts', label: 'Emergency Alerts', icon: '🚨' },
+      ]
+    },
+    {
+      label: 'Community',
+      icon: '👥',
+      isDropdown: true,
+      items: [
+        { path: '/officials', label: 'Officials', icon: '👔' },
+        { path: '/events', label: 'Events & Programs', icon: '📅' },
+      ]
+    },
+    { path: '/vote', label: 'Participate', icon: '🗳️' },
+    { path: '/feedback', label: 'Feedback', icon: '💬' },
   ];
+
+  const toggleDropdown = (label) => {
+    setOpenDropdown(openDropdown === label ? null : label);
+  };
+
+  const isItemActive = (item) => {
+    if (item.path) {
+      return location.pathname === item.path;
+    }
+    if (item.isDropdown) {
+      return item.items.some(subItem => location.pathname === subItem.path);
+    }
+    return false;
+  };
 
   const handleLogout = async () => {
     try {
@@ -94,16 +124,52 @@ const Navbar = () => {
           {/* Navigation Items */}
           <nav className="sidebar-nav">
             {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={(e) => handleNavClick(e, item.path)}
-                className={`sidebar-nav-item ${location.pathname === item.path ? 'active' : ''}`}
-                title={!isSidebarOpen ? item.label : ''}
-              >
-                <span className="nav-icon">{item.icon}</span>
-                {isSidebarOpen && <span className="nav-label">{item.label}</span>}
-              </Link>
+              <div key={item.label} className="nav-item-container">
+                {item.isDropdown ? (
+                  <>
+                    <button
+                      onClick={() => toggleDropdown(item.label)}
+                      className={`sidebar-nav-item dropdown-toggle ${isItemActive(item) ? 'active' : ''}`}
+                      title={!isSidebarOpen ? item.label : ''}
+                    >
+                      <span className="nav-icon">{item.icon}</span>
+                      {isSidebarOpen && (
+                        <>
+                          <span className="nav-label">{item.label}</span>
+                          <span className={`dropdown-chevron ${openDropdown === item.label ? 'open' : ''}`}>
+                            ▼
+                          </span>
+                        </>
+                      )}
+                    </button>
+                    {isSidebarOpen && openDropdown === item.label && (
+                      <div className="dropdown-menu">
+                        {item.items.map((subItem) => (
+                          <Link
+                            key={subItem.path}
+                            to={subItem.path}
+                            onClick={(e) => handleNavClick(e, subItem.path)}
+                            className={`dropdown-item ${location.pathname === subItem.path ? 'active' : ''}`}
+                          >
+                            <span className="nav-icon">{subItem.icon}</span>
+                            <span className="nav-label">{subItem.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    to={item.path}
+                    onClick={(e) => handleNavClick(e, item.path)}
+                    className={`sidebar-nav-item ${location.pathname === item.path ? 'active' : ''}`}
+                    title={!isSidebarOpen ? item.label : ''}
+                  >
+                    <span className="nav-icon">{item.icon}</span>
+                    {isSidebarOpen && <span className="nav-label">{item.label}</span>}
+                  </Link>
+                )}
+              </div>
             ))}
           </nav>
 
