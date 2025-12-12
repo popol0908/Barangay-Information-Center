@@ -4,11 +4,13 @@ import { useToast } from '../../contexts/ToastContext';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc, collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase';
+import { archiveRecord } from '../../services/archiveService';
 import AdminNavbar from '../../components/AdminNavbar';
 import './ManageAdminAccounts.css';
 
 const ManageAdminAccounts = () => {
   const { showToast } = useToast();
+  const { currentUser, userProfile } = useAuth();
   const [adminAccounts, setAdminAccounts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -135,6 +137,12 @@ const ManageAdminAccounts = () => {
 
     try {
       setLoading(true);
+
+      const archivedBy = currentUser?.uid || null;
+      const archivedByEmail = currentUser?.email || userProfile?.email || null;
+      
+      // Archive the user record before deleting
+      await archiveRecord('users', selectedAdmin.id, archivedBy, archivedByEmail);
 
       // Delete user from Firestore
       await deleteDoc(doc(db, 'users', selectedAdmin.id));

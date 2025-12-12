@@ -8,6 +8,7 @@ import './ManageOfficials.css';
 
 const ManageOfficials = () => {
   const { showToast } = useToast();
+  const { currentUser, userProfile } = useAuth();
   const [officials, setOfficials] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -104,11 +105,18 @@ const ManageOfficials = () => {
     setShowModal(true);
   };
 
-  const handleDelete = () => {
-    deleteItem('officials', selectedOfficial.id);
-    showToast('Official deleted successfully!', 'success');
-    setShowDeleteDialog(false);
-    setSelectedOfficial(null);
+  const handleDelete = async () => {
+    try {
+      const archivedBy = currentUser?.uid || null;
+      const archivedByEmail = currentUser?.email || userProfile?.email || null;
+      await deleteItem('officials', selectedOfficial.id, archivedBy, archivedByEmail);
+      showToast('Official deleted successfully!', 'success');
+      setShowDeleteDialog(false);
+      setSelectedOfficial(null);
+    } catch (error) {
+      console.error('Error deleting official:', error);
+      showToast('Error deleting official', 'error');
+    }
   };
 
   const openDeleteDialog = (official) => {

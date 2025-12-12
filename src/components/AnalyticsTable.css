@@ -1,0 +1,344 @@
+/* Analytics Table Styles */
+.analytics-table-container {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+/* Table Controls */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+    min-width: 200px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #999;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #0052cc;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(76, 175, 80, 0.3);
+}
+
+.export-btn:hover {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.export-icon {
+    font-size: 1.1rem;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 1.5rem;
+}
+
+/* Table */
+.analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background: white;
+}
+
+.analytics-table thead {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 2px solid #dee2e6;
+}
+
+.analytics-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 700;
+    color: #333;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.analytics-table th.sortable {
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.analytics-table th.sortable:hover {
+    background: rgba(0, 82, 204, 0.05);
+}
+
+.th-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.sort-indicator {
+    font-size: 0.75rem;
+    color: #999;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+
+.analytics-table th.sortable:hover .sort-indicator {
+    opacity: 1;
+    color: #0052cc;
+}
+
+.analytics-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s ease;
+}
+
+.analytics-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.analytics-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.analytics-table td {
+    padding: 1rem;
+    color: #555;
+    vertical-align: middle;
+}
+
+/* Empty State */
+.table-empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: #999;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.table-empty-state p {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Pagination */
+.table-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.pagination-info {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-btn,
+.page-number {
+    padding: 0.5rem 0.875rem;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.page-btn:hover:not(:disabled),
+.page-number:hover {
+    background: #f8f9fa;
+    border-color: #0052cc;
+    color: #0052cc;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-number.active {
+    background: #0052cc;
+    color: white;
+    border-color: #0052cc;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 0.25rem;
+}
+
+/* Loading Skeleton */
+.table-skeleton {
+    padding: 1rem 0;
+}
+
+.skeleton-row {
+    height: 48px;
+    background: linear-gradient(90deg,
+            #f0f0f0 0%,
+            #f8f8f8 50%,
+            #f0f0f0 100%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-row.skeleton-header {
+    height: 56px;
+    background: linear-gradient(90deg,
+            #e0e0e0 0%,
+            #e8e8e8 50%,
+            #e0e0e0 100%);
+    background-size: 200% 100%;
+    margin-bottom: 1rem;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .analytics-table {
+        font-size: 0.85rem;
+    }
+
+    .analytics-table th,
+    .analytics-table td {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .analytics-table-container {
+        padding: 1rem;
+    }
+
+    .table-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        max-width: 100%;
+    }
+
+    .export-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .analytics-table {
+        font-size: 0.8rem;
+    }
+
+    .analytics-table th,
+    .analytics-table td {
+        padding: 0.625rem;
+    }
+
+    .table-pagination {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pagination-controls {
+        justify-content: center;
+    }
+
+    .pagination-info {
+        text-align: center;
+    }
+
+    .page-numbers {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .analytics-table-container {
+        padding: 0.875rem;
+    }
+
+    .analytics-table {
+        font-size: 0.75rem;
+    }
+
+    .analytics-table th,
+    .analytics-table td {
+        padding: 0.5rem;
+    }
+
+    .page-btn,
+    .page-number {
+        padding: 0.5rem 0.625rem;
+        font-size: 0.75rem;
+    }
+}

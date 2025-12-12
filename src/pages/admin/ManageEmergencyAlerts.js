@@ -9,6 +9,7 @@ import './ManageEmergencyAlerts.css';
 
 const ManageEmergencyAlerts = () => {
   const { showToast } = useToast();
+  const { currentUser, userProfile } = useAuth();
   const [alerts, setAlerts] = useState([]);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState(null);
@@ -129,7 +130,9 @@ const ManageEmergencyAlerts = () => {
 
   const handleDelete = async () => {
     try {
-      deleteItem('emergencyAlerts', selectedAlert.id);
+      const archivedBy = currentUser?.uid || null;
+      const archivedByEmail = currentUser?.email || userProfile?.email || null;
+      await deleteItem('emergencyAlerts', selectedAlert.id, archivedBy, archivedByEmail);
       showToast('Emergency alert deleted successfully!', 'success');
       setShowDeleteDialog(false);
       setSelectedAlert(null);

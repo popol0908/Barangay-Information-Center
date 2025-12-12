@@ -140,6 +140,17 @@ service cloud.firestore {
       allow update, delete: if isAdmin();
     }
     
+    // Archived collections - for historical data and auditing
+    // Pattern: archived_{collectionName}
+    match /archived_{collection}/{documentId} {
+      // Only admins can create archived records (during deletion)
+      allow create: if isAdmin();
+      // Only admins can read archived records (for auditing and analytics)
+      allow read: if isAdmin();
+      // Archived records should not be updated or deleted
+      allow update, delete: if false;
+    }
+    
     // Default: deny all other access
     match /{document=**} {
       allow read, write: if false;

@@ -9,6 +9,7 @@ import './ManageAnnouncements.css';
 
 const ManageAnnouncements = () => {
   const { showToast } = useToast();
+  const { currentUser, userProfile } = useAuth();
   const [announcements, setAnnouncements] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -169,7 +170,9 @@ const ManageAnnouncements = () => {
 
   const handleDelete = async () => {
     try {
-      deleteItem('announcements', selectedAnnouncement.id);
+      const archivedBy = currentUser?.uid || null;
+      const archivedByEmail = currentUser?.email || userProfile?.email || null;
+      await deleteItem('announcements', selectedAnnouncement.id, archivedBy, archivedByEmail);
       showToast('Announcement deleted successfully!', 'success');
       setShowDeleteDialog(false);
       setSelectedAnnouncement(null);

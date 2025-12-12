@@ -41,9 +41,10 @@ const AdminNavbar = () => {
       items: [
         { path: '/admin/voting', label: 'Voting & Surveys', icon: '🗳️' },
         { path: '/admin/events', label: 'Events & Programs', icon: '📅' },
+        { path: '/admin/feedback', label: 'Review Feedback', icon: '💬' },
       ]
     },
-    { path: '/admin/feedback', label: 'Review Feedback', icon: '💬' },
+    { path: '/admin/analytics', label: 'Analytics & Reports', icon: '📊' },
     { path: '/admin/accounts', label: 'Admin Accounts', icon: '⚙️' },
   ];
 

@@ -80,28 +80,107 @@ const Dashboard = () => {
 
       {}
       <section className="quick-actions-section">
-        <div className="section-header">
+        <div className="quick-actions">
           <h2 className="section-title">Quick Actions</h2>
-        </div>
-        
-        <div className="quick-actions-grid">
-          <Link to="/emergency-alerts" className="quick-action-card emergency-card">
-            <div className="quick-action-icon">🚨</div>
-            <h3>Emergency Alerts</h3>
-            <p>View active emergency notifications</p>
-          </Link>
           
-          <Link to="/officials" className="quick-action-card">
-            <div className="quick-action-icon">👥</div>
-            <h3>Barangay Officials</h3>
-            <p>Meet your local government officials</p>
-          </Link>
-          
-          <Link to="/announcements" className="quick-action-card">
-            <div className="quick-action-icon">📢</div>
-            <h3>All Announcements</h3>
-            <p>Browse all community announcements</p>
-          </Link>
+          {/* Community Information */}
+          <div className="action-group">
+            <h3 className="action-group-title">
+              <span className="group-icon">📢</span>
+              Community Information
+            </h3>
+            <div className="action-buttons">
+              <Link to="/announcements" className="action-card action-primary">
+                <div className="action-card-icon">📢</div>
+                <div className="action-card-content">
+                  <h4 className="action-card-title">Announcements</h4>
+                  <p className="action-card-description">Browse all community announcements and updates</p>
+                </div>
+                <div className="action-card-arrow">→</div>
+              </Link>
+              
+              <Link to="/emergency-alerts" className="action-card action-danger">
+                <div className="action-card-icon">🚨</div>
+                <div className="action-card-content">
+                  <h4 className="action-card-title">Emergency Alerts</h4>
+                  <p className="action-card-description">View active emergency notifications and warnings</p>
+                </div>
+                <div className="action-card-arrow">→</div>
+              </Link>
+              
+              <Link to="/officials" className="action-card action-info">
+                <div className="action-card-icon">👥</div>
+                <div className="action-card-content">
+                  <h4 className="action-card-title">Barangay Officials</h4>
+                  <p className="action-card-description">Meet your local government officials</p>
+                </div>
+                <div className="action-card-arrow">→</div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Community Engagement */}
+          <div className="action-group">
+            <h3 className="action-group-title">
+              <span className="group-icon">🗳️</span>
+              Community Engagement
+            </h3>
+            <div className="action-buttons">
+              <Link to="/vote" className="action-card action-success">
+                <div className="action-card-icon">🗳️</div>
+                <div className="action-card-content">
+                  <h4 className="action-card-title">Voting & Surveys</h4>
+                  <p className="action-card-description">Participate in community voting events</p>
+                </div>
+                <div className="action-card-arrow">→</div>
+              </Link>
+              
+              <Link to="/events" className="action-card action-warning">
+                <div className="action-card-icon">📅</div>
+                <div className="action-card-content">
+                  <h4 className="action-card-title">Community Events</h4>
+                  <p className="action-card-description">View and join upcoming community events</p>
+                </div>
+                <div className="action-card-arrow">→</div>
+              </Link>
+              
+              <Link to="/feedback" className="action-card action-secondary">
+                <div className="action-card-icon">💬</div>
+                <div className="action-card-content">
+                  <h4 className="action-card-title">Submit Feedback</h4>
+                  <p className="action-card-description">Share your thoughts and suggestions</p>
+                </div>
+                <div className="action-card-arrow">→</div>
+              </Link>
+              
+              <Link to="/community-insights" className="action-card action-primary">
+                <div className="action-card-icon">📊</div>
+                <div className="action-card-content">
+                  <h4 className="action-card-title">Community Insights</h4>
+                  <p className="action-card-description">View aggregated community statistics</p>
+                </div>
+                <div className="action-card-arrow">→</div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Personal */}
+          <div className="action-group">
+            <h3 className="action-group-title">
+              <span className="group-icon">👤</span>
+              Personal
+            </h3>
+            <div className="action-buttons">
+              <Link to="/profile" className="action-card action-info">
+                <div className="action-card-icon">👤</div>
+                <div className="action-card-content">
+                  <h4 className="action-card-title">My Profile</h4>
+                  <p className="action-card-description">View and manage your account information</p>
+                </div>
+                <div className="action-card-arrow">→</div>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

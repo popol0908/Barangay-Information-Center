@@ -1,0 +1,212 @@
+/* Export PDF Modal Styles */
+.export-pdf-modal {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.export-pdf-modal .modal-header {
+    padding: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.export-pdf-modal .modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.export-pdf-modal .modal-icon {
+    font-size: 1.75rem;
+}
+
+.export-pdf-modal .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    color: #666;
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+.export-pdf-modal .modal-close:hover {
+    color: #dc3545;
+}
+
+.export-pdf-modal .modal-body {
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+}
+
+.export-pdf-modal .modal-description {
+    font-size: 1rem;
+    color: #555;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
+}
+
+.date-range-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.range-option {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.range-option:hover {
+    border-color: #0052cc;
+    background: rgba(0, 82, 204, 0.02);
+}
+
+.range-option input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #0052cc;
+}
+
+.range-option-label {
+    margin-left: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    flex: 1;
+}
+
+.range-option:has(input:checked) {
+    border-color: #0052cc;
+    background: linear-gradient(90deg, rgba(0, 82, 204, 0.1) 0%, rgba(0, 82, 204, 0.02) 100%);
+}
+
+.range-option:has(input:checked) .range-option-label {
+    color: #0052cc;
+}
+
+.modal-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.875rem;
+    background: #e7f3ff;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #004085;
+    line-height: 1.4;
+}
+
+.info-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.export-pdf-modal .modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    background: #f8f9fa;
+}
+
+.export-pdf-modal .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.export-pdf-modal .btn-secondary {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.export-pdf-modal .btn-secondary:hover {
+    background: #dee2e6;
+}
+
+.export-pdf-modal .btn-primary {
+    background: linear-gradient(135deg, #0052cc 0%, #004099 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 82, 204, 0.3);
+}
+
+.export-pdf-modal .btn-primary:hover {
+    background: linear-gradient(135deg, #004099 0%, #003366 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 82, 204, 0.4);
+}
+
+.export-pdf-modal .btn-icon {
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .export-pdf-modal {
+        width: 95%;
+        border-radius: 12px;
+    }
+
+    .export-pdf-modal .modal-header {
+        padding: 1.25rem;
+    }
+
+    .export-pdf-modal .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .export-pdf-modal .modal-body {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .export-pdf-modal .modal-footer {
+        padding: 0.875rem 1.25rem;
+        flex-direction: column-reverse;
+    }
+
+    .export-pdf-modal .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .range-option {
+        padding: 0.875rem;
+    }
+
+    .range-option-label {
+        font-size: 0.95rem;
+    }
+}

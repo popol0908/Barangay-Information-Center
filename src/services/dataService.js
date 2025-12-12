@@ -12,6 +12,7 @@ import {
   writeBatch
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { archiveRecord, archiveRecords } from './archiveService';
 
 // Cache for real-time listeners
 const listeners = {};
@@ -79,10 +80,18 @@ export const updateItem = async (section, id, updates) => {
 };
 
 /**
- * Delete an item from a collection
+ * Delete an item from a collection (archives it first)
+ * @param {string} section - Collection name
+ * @param {string} id - Document ID
+ * @param {string} archivedBy - Optional: User ID who performed the deletion
+ * @param {string} archivedByEmail - Optional: Email of the user who performed the deletion
  */
-export const deleteItem = async (section, id) => {
+export const deleteItem = async (section, id, archivedBy = null, archivedByEmail = null) => {
   try {
+    // Archive the record before deleting
+    await archiveRecord(section, id, archivedBy, archivedByEmail);
+    
+    // Delete the original document
     const docRef = doc(db, section, id);
     await deleteDoc(docRef);
     return true;
@@ -238,14 +247,24 @@ export const exportData = async () => {
 };
 
 /**
- * Clear a section (delete all documents)
+ * Clear a section (archives all documents before deleting)
+ * @param {string} section - Collection name
+ * @param {string} archivedBy - Optional: User ID who performed the deletion
+ * @param {string} archivedByEmail - Optional: Email of the user who performed the deletion
  */
-export const clearSection = async (section) => {
+export const clearSection = async (section, archivedBy = null, archivedByEmail = null) => {
   try {
     const collectionRef = collection(db, section);
     const snapshot = await getDocs(collectionRef);
-    const batch = writeBatch(db);
     
+    // Archive all documents first
+    const recordIds = snapshot.docs.map(doc => doc.id);
+    if (recordIds.length > 0) {
+      await archiveRecords(section, recordIds, archivedBy, archivedByEmail);
+    }
+    
+    // Delete all documents
+    const batch = writeBatch(db);
     snapshot.docs.forEach(doc => {
       batch.delete(doc.ref);
     });

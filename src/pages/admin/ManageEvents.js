@@ -8,7 +8,7 @@ import './ManageEvents.css';
 
 const ManageEvents = () => {
   const { showToast } = useToast();
-  const { currentUser } = useAuth();
+  const { currentUser, userProfile } = useAuth();
   const [events, setEvents] = useState([]);
   const [registrations, setRegistrations] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -218,14 +218,17 @@ const ManageEvents = () => {
     if (!selectedEvent) return;
 
     try {
-      // Delete all registrations for this event
+      const archivedBy = currentUser?.uid || null;
+      const archivedByEmail = currentUser?.email || userProfile?.email || null;
+      
+      // Delete all registrations for this event (will be archived first)
       const eventRegistrations = getEventRegistrations(selectedEvent.id);
       for (const reg of eventRegistrations) {
-        await deleteItem('eventRegistrations', reg.id);
+        await deleteItem('eventRegistrations', reg.id, archivedBy, archivedByEmail);
       }
 
-      // Delete the event
-      await deleteItem('events', selectedEvent.id);
+      // Delete the event (will be archived first)
+      await deleteItem('events', selectedEvent.id, archivedBy, archivedByEmail);
       showToast('Event deleted successfully!', 'success');
       setShowDeleteDialog(false);
       setSelectedEvent(null);

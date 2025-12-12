@@ -9,6 +9,7 @@ import './ManageVoting.css';
 
 const ManageVoting = () => {
   const { showToast } = useToast();
+  const { currentUser, userProfile } = useAuth();
   const [votingEvents, setVotingEvents] = useState([]);
   const [userVotes, setUserVotes] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -264,8 +265,10 @@ const ManageVoting = () => {
     setIsSubmitting(true);
 
     try {
-      // Delete the voting event from Firestore
-      await deleteItem('voting', selectedEvent.id);
+      const archivedBy = currentUser?.uid || null;
+      const archivedByEmail = currentUser?.email || userProfile?.email || null;
+      // Delete the voting event from Firestore (will be archived first)
+      await deleteItem('voting', selectedEvent.id, archivedBy, archivedByEmail);
 
       showToast('Voting event deleted successfully!', 'success');
       

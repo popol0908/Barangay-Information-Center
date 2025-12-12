@@ -33,6 +33,7 @@ import Vote from './pages/Vote';
 import ManageVoting from './pages/admin/ManageVoting';
 import Events from './pages/Events';
 import ManageEvents from './pages/admin/ManageEvents';
+import AdminAnalytics from './pages/admin/AdminAnalytics';
 import './App.css';
 import './styles/common.css';
 
@@ -47,7 +48,7 @@ function AppContent() {
   const isAdminPage = location.pathname.startsWith('/admin');
   const isLandingPage = location.pathname === '/';
   const isAdminLoginPage = location.pathname === '/admin/login';
-  
+
   // Only show ChatAssistant when user is authenticated and not on public pages
   const shouldShowChatAssistant = currentUser && !isLandingPage && !isAuthPage && !isAdminLoginPage;
 
@@ -59,15 +60,15 @@ function AppContent() {
     }
 
     // Don't show loading for auth page transitions
-    const isAuthTransition = 
-      location.pathname === '/login' || 
+    const isAuthTransition =
+      location.pathname === '/login' ||
       location.pathname === '/signup' ||
       prevLocationRef.current === '/login' ||
       prevLocationRef.current === '/signup';
 
     if (!isAuthTransition) {
       startLoading('Loading page...');
-      
+
       // Clear any existing timeout
       if (loadingTimeoutRef.current) {
         clearTimeout(loadingTimeoutRef.current);
@@ -118,8 +119,8 @@ function AppContent() {
       <div className="App">
         {!isAuthPage && !isAdminPage && !isLandingPage && <Navbar />}
         <main className="main-content">
-        <Routes>
-            {}
+          <Routes>
+            { }
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route
@@ -202,8 +203,8 @@ function AppContent() {
                 </ProtectedRoute>
               }
             />
-            
-            {}
+
+            { }
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin/dashboard"
@@ -277,15 +278,23 @@ function AppContent() {
                 </AdminProtectedRoute>
               }
             />
-            
+            <Route
+              path="/admin/analytics"
+              element={
+                <AdminProtectedRoute>
+                  <AdminAnalytics />
+                </AdminProtectedRoute>
+              }
+            />
+
             <Route path="/" element={<Landing />} />
           </Routes>
-          </main>
-          {!isAuthPage && !isAdminPage && !isLandingPage && <Footer />}
-        </div>
-        {shouldShowChatAssistant && <ChatAssistant />}
-        <SpeedInsights />
-      </>
+        </main>
+        {!isAuthPage && !isAdminPage && !isLandingPage && <Footer />}
+      </div>
+      {shouldShowChatAssistant && <ChatAssistant />}
+      <SpeedInsights />
+    </>
   );
 }
 
