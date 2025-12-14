@@ -1,9 +1,9 @@
-# TEAM BARANGAY SYSTEM
-**BSIT-3B**
+# TEAM DCG
+**BSIT-3C**
 
 ---
 
-## 🏛️ Barangay Voting and Information System
+## 🏛️ iBayan Portal
 *A web-based platform for barangay governance through digital voting, community feedback, and data-driven analytics. Empowering local communities with transparent, accessible, and secure tools for civic participation.*
 
 ---
@@ -96,40 +96,5 @@
 
 ---
 
-## �️ Tech Stack
-
-| Layer | Technologies |
-|-------|-------------|
-| **Frontend** | React, React Router, Recharts, CSS3 |
-| **Backend** | Firebase (Auth, Firestore, Storage) |
-| **Services** | EmailJS, Google Generative AI |
-| **Deployment** | Vercel, GitHub |
-| **Tools** | jsPDF, jsPDF-AutoTable |
-
----
-
-## 🚀 Quick Start
-
-```bash
-# Clone repository
-git clone https://github.com/popol0908/Barangay-Information-Center.git
-cd barangay-system
-
-# Install dependencies
-npm install
-
-# Configure environment variables
-cp .env.example .env
-# Edit .env with your credentials
-
-# Run development server
-npm start
-
-# Build for production
-npm run build
-```
-
----
-
 ## 👥 Team
-**TEAM BARANGAY SYSTEM** - BSIT-3B
+**TEAM DCG** - BSIT-3C
