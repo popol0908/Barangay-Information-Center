@@ -1,1 +1,11 @@
+# Dependencies
 node_modules
+
+# Environment variables
+.env
+
+# Production build
+build
+
+# Logs
+*.log

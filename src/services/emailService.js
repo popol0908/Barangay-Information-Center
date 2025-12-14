@@ -2,9 +2,9 @@ import emailjs from '@emailjs/browser';
 
 // Initialize EmailJS with your public key
 // Get these from https://dashboard.emailjs.com/
-const EMAILJS_SERVICE_ID = 'service_d8aqnzd'; // Replace with your service ID
-const EMAILJS_TEMPLATE_ID = 'template_letkrl8'; // Replace with your template ID
-const EMAILJS_PUBLIC_KEY = 'WNj_V7BeEtpOAGdYt'; // Replace with your public key
+const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
 // Initialize EmailJS
 emailjs.init(EMAILJS_PUBLIC_KEY);
